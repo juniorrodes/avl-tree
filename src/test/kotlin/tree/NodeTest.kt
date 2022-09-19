@@ -59,7 +59,7 @@ internal class NodeTest {
         assertEquals(excepted, tree.toString())
 
         tree?.insert(insertionArray[0])
-        excepted = "$excepted\n\t\t6"
+        excepted = "$excepted\n\t\t"
         assertEquals(excepted, tree.toString())
     }
 
