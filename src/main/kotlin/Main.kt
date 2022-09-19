@@ -1,5 +1,4 @@
 import tree.Node
-import exceptions.NodeException
 import java.io.File
 
 fun main(args: Array<String>) {
@@ -8,12 +7,9 @@ fun main(args: Array<String>) {
 
     val tree = Node(numbers[0])
     for (i in numbers) {
-        try {
-            tree.insert(i)
-        } catch (e: NodeException) {
-            continue
-        }
+        tree.insert(i)
     }
 
     print(tree)
+    readLine()
 }

@@ -1,9 +1,7 @@
 package tree
 
-import exceptions.NodeException
-
 class Node(private val key: Int,
-           private var height: Int = 0,
+           private var height: Int = 1,
            private var leftChild: Node? = null,
            private var rightChild: Node? = null,) {
 
@@ -13,29 +11,33 @@ class Node(private val key: Int,
         else -> this
     }
 
-    fun insert(value: Int) {
-        if (this.find(value) == null) {
+    fun insert(value: Int): Node? {
+        return if (this.find(value) == null) {
             if (value < this.key) {
                 if (this.leftChild == null) {
-                    this.leftChild = Node(value, this.height + 1)
+                    val newNode = Node(value, this.height + 1)
+                    this.leftChild = newNode
+                    return newNode
                 } else {
                     this.leftChild!!.insert(value)
                 }
             } else {
                 if (this.rightChild == null) {
-                    this.rightChild = Node(value, this.height + 1)
+                    val newNode = Node(value, this.height + 1)
+                    this.rightChild = newNode
+                    return newNode
                 } else {
                     this.rightChild!!.insert(value)
                 }
             }
         } else {
-            throw NodeException("Key $value already exist")
+            return null
         }
     }
 
     override fun toString(): String {
         var indentation = ""
-        for (i in 1..this.height) {
+        for (i in 2..this.height) {
             indentation = "$indentation\t"
         }
         if ((this.leftChild === null) && (this.rightChild !== null)) {
@@ -67,5 +69,13 @@ class Node(private val key: Int,
             return false
         }
         return true
+    }
+
+    override fun hashCode(): Int {
+        var result = key
+        result = 31 * result + height
+        result = 31 * result + (leftChild?.hashCode() ?: 0)
+        result = 31 * result + (rightChild?.hashCode() ?: 0)
+        return result
     }
 }
