@@ -5,32 +5,36 @@ import org.junit.jupiter.api.Test
 import kotlin.test.*
 
 internal class NodeTest {
-    private var tree: Node? = null
+    private var tree: Node? = null //6, 2, 7, 5, 1, 3
+    private var insertionArray = arrayOf<Int>(6, 2, 7, 5, 1, 3)
+    private var rootKey = 4
+
     @BeforeEach
     fun setup() {
-        tree = Node(4)
+        tree = Node(rootKey)
     }
 
     @Test
     fun when_insert_new_node_should_found_same_key_in_the_structure() {
+        tree?.let { assertEquals(Node(insertionArray[0], 1, 1), it.insert(6), "Key already exists") }
+        tree?.let { assertEquals(Node(insertionArray[0], 1, 1), it.find(6), "Value not found") }
+        tree?.let { assertEquals(Node(rootKey, height =  2).getHeight(), it.find(4)?.getHeight(), "Height isn't correct") }
 
-        tree?.let { assertEquals(Node(6, 2), it.insert(6), "Key already exists") }
-        tree?.let { assertEquals(Node(6, 2), it.find(6), "Value not found") }
+        tree?.let { assertEquals(Node(insertionArray[1], 1, 1), it.insert(2), "Key already exists") }
+        tree?.let { assertEquals(Node(insertionArray[1], 1, 1), it.find(2), "Value not found") }
 
-        tree?.let { assertEquals(Node(2, 2), it.insert(2), "Key already exists") }
-        tree?.let { assertEquals(Node(2, 2), it.find(2), "Value not found") }
+        tree?.let { assertEquals(Node(insertionArray[2], 2, 1), it.insert(7), "Key already exists") }
+        tree?.let { assertEquals(Node(insertionArray[2], 2, 1), it.find(7), "Value not found") }
+        tree?.let { assertEquals(Node(rootKey, height =  3).getHeight(), it.find(4)?.getHeight(), "Height isn't correct") }
 
-        tree?.let { assertEquals(Node(7, 3), it.insert(7), "Key already exists") }
-        tree?.let { assertEquals(Node(7, 3), it.find(7), "Value not found") }
+        tree?.let { assertEquals(Node(insertionArray[3], 2, 1), it.insert(5), "Key already exists") }
+        tree?.let { assertEquals(Node(insertionArray[3], 2, 1), it.find(5), "Value not found") }
 
-        tree?.let { assertEquals(Node(5, 3), it.insert(5), "Key already exists") }
-        tree?.let { assertEquals(Node(5, 3), it.find(5), "Value not found") }
+        tree?.let { assertEquals(Node(insertionArray[4], 2, 1), it.insert(1), "Key already exists") }
+        tree?.let { assertEquals(Node(insertionArray[4], 2, 1), it.find(1), "Value not found") }
 
-        tree?.let { assertEquals(Node(1, 3), it.insert(1), "Key already exists") }
-        tree?.let { assertEquals(Node(1, 3), it.find(1), "Value not found") }
-
-        tree?.let { assertEquals(Node(3, 3), it.insert(3), "Key already exists") }
-        tree?.let { assertEquals(Node(3, 3), it.find(3), "Value not found") }
+        tree?.let { assertEquals(Node(insertionArray[5], 2, 1), it.insert(3), "Key already exists") }
+        tree?.let { assertEquals(Node(insertionArray[5], 2, 1), it.find(3), "Value not found") }
     }
 
     @Test
@@ -46,20 +50,17 @@ internal class NodeTest {
         var found = tree?.toString()
         assertEquals(excepted, found)
 
-        tree?.insert(2)
-        found = tree.toString()
+        tree?.insert(insertionArray[1])
         excepted = "$excepted\n\t2"
-        assertEquals(excepted, found)
+        assertEquals(excepted, tree.toString())
 
-        tree?.insert(5)
-        found = tree.toString()
+        tree?.insert(insertionArray[3])
         excepted = "$excepted\n\t5"
-        assertEquals(excepted, found)
+        assertEquals(excepted, tree.toString())
 
-        tree?.insert(6)
-        found = tree.toString()
+        tree?.insert(insertionArray[0])
         excepted = "$excepted\n\t\t6"
-        assertEquals(excepted, found)
+        assertEquals(excepted, tree.toString())
     }
 
     @Test
@@ -70,7 +71,7 @@ internal class NodeTest {
     @Test
     fun test_not_equals() {
         assertNotEquals(Node(5), Node(3), "Keys are equal")
-        assertNotEquals(Node(5), Node(5, 0), "Height is equal")
+        assertNotEquals(Node(5), Node(5, 1), "Height is equal")
         assertNotEquals(Node(5, leftChild = Node(3)), Node(5, leftChild = Node(2)), "Left children is different")
         assertNotEquals(Node(5, rightChild = Node(6)), Node(5, rightChild = Node(7)), "Right children is different")
     }
