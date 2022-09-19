@@ -1,7 +1,19 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import tree.Node
+import exceptions.NodeException
+import java.io.File
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+fun main(args: Array<String>) {
+    val fileContent = File(args[0]).bufferedReader().readLine().split(";")
+    val numbers = fileContent.map {it.toInt()}.toIntArray()
+
+    val tree = Node(numbers[0])
+    for (i in numbers) {
+        try {
+            tree.insert(i)
+        } catch (e: NodeException) {
+            continue
+        }
+    }
+
+    print(tree)
 }

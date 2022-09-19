@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="tree.NodeTest" time="0.205" tests="5" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="18"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="E:\Documents\Unisinos\EstruturasDeDadosI\avl-tree\target\test-classes;E:\Documents\Unisinos\EstruturasDeDadosI\avl-tree\target\classes;C:\Users\Gamer\.m2\repository\org\jetbrains\kotlin\kotlin-test-junit5\1.6.21\kotlin-test-junit5-1.6.21.jar;C:\Users\Gamer\.m2\repository\org\jetbrains\kotlin\kotlin-test\1.6.21\kotlin-test-1.6.21.jar;C:\Users\Gamer\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\Gamer\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Gamer\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\Gamer\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\Gamer\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Gamer\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;C:\Users\Gamer\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-jdk8\1.6.21\kotlin-stdlib-jdk8-1.6.21.jar;C:\Users\Gamer\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib\1.6.21\kotlin-stdlib-1.6.21.jar;C:\Users\Gamer\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-common\1.6.21\kotlin-stdlib-common-1.6.21.jar;C:\Users\Gamer\.m2\repository\org\jetbrains\annotations\13.0\annotations-13.0.jar;C:\Users\Gamer\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-jdk7\1.6.21\kotlin-stdlib-jdk7-1.6.21.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="America/Sao_Paulo"/>
+    <property name="user.country.format" value="US"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="java.vm.specification.version" value="18"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="BR"/>
+    <property name="sun.boot.library.path" value="C:\Users\Gamer\.jdks\openjdk-18.0.2.1\bin"/>
+    <property name="sun.java.command" value="C:\Users\Gamer\AppData\Local\Temp\surefire1122397020580098373\surefirebooter10713245613554377553.jar C:\Users\Gamer\AppData\Local\Temp\surefire1122397020580098373 2022-09-19T00-37-14_557-jvmRun1 surefire5584580941959991337tmp surefire_012757389429217769184tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="E:\Documents\Unisinos\EstruturasDeDadosI\avl-tree\target\test-classes;E:\Documents\Unisinos\EstruturasDeDadosI\avl-tree\target\classes;C:\Users\Gamer\.m2\repository\org\jetbrains\kotlin\kotlin-test-junit5\1.6.21\kotlin-test-junit5-1.6.21.jar;C:\Users\Gamer\.m2\repository\org\jetbrains\kotlin\kotlin-test\1.6.21\kotlin-test-1.6.21.jar;C:\Users\Gamer\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\Gamer\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Gamer\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\Gamer\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\Gamer\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Gamer\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;C:\Users\Gamer\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-jdk8\1.6.21\kotlin-stdlib-jdk8-1.6.21.jar;C:\Users\Gamer\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib\1.6.21\kotlin-stdlib-1.6.21.jar;C:\Users\Gamer\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-common\1.6.21\kotlin-stdlib-common-1.6.21.jar;C:\Users\Gamer\.m2\repository\org\jetbrains\annotations\13.0\annotations-13.0.jar;C:\Users\Gamer\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-jdk7\1.6.21\kotlin-stdlib-jdk7-1.6.21.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\Gamer"/>
+    <property name="user.language" value="pt"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2022-08-18"/>
+    <property name="java.home" value="C:\Users\Gamer\.jdks\openjdk-18.0.2.1"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="E:\Documents\Unisinos\EstruturasDeDadosI\avl-tree"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\Gamer\AppData\Local\Temp\surefire1122397020580098373\surefirebooter10713245613554377553.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="18.0.2.1+1-1"/>
+    <property name="user.name" value="Gamer"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\Gamer\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\Gamer\AppData\Local\Temp\"/>
+    <property name="idea.version" value="2022.2"/>
+    <property name="java.version" value="18.0.2.1"/>
+    <property name="user.dir" value="E:\Documents\Unisinos\EstruturasDeDadosI\avl-tree"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.language.format" value="en"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Users\Gamer\.jdks\openjdk-18.0.2.1\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Python310\Scripts\;C:\Python310\;C:\Program Files\Microsoft\jdk-11.0.12.7-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\dotnet\;C:\Program Files\LLVM\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\PuTTY\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\nodejs\;C:\Program Files\Go\bin;C:\Program Files\tinygo\bin;C:\Espressif\tools\xtensa-esp32-elf\esp-2021r2-patch3-8.4.0\xtensa-esp32-elf\bin;C:\Program Files\usbipd-win\;C:\Users\Gamer\.cargo\bin;C:\Users\Gamer\AppData\Local\Microsoft\WindowsApps;C:\Users\Gamer\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Gamer\.dotnet\tools;C:\Users\Gamer\AppData\Local\Programs\oh-my-posh\bin;C:\Users\Gamer\AppData\Roaming\npm;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.2\bin;;C:\Program Files\JetBrains\PyCharm Community Edition 2022.2\bin;;C:\Program Files\JetBrains\CLion 2022.2\bin;;C:\Users\Gamer\go\bin;C:\Program Files\JetBrains\GoLand 2022.2.2\bin;;C:\Users\Gamer\AppData\Local\Programs\Julia-1.8.0\bin;C:\tools\neovim\nvim-win64\bin;;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="18.0.2.1+1-1"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="62.0"/>
+  </properties>
+  <testcase name="test_if_equals" classname="tree.NodeTest" time="0.057"/>
+  <testcase name="should_return_correct_string" classname="tree.NodeTest" time="0.001"/>
+  <testcase name="when_insert_new_node_should_found_same_key_in_the_structure" classname="tree.NodeTest" time="0"/>
+  <testcase name="when_insert_key_that_already_exists_should_throw_exception" classname="tree.NodeTest" time="0.132"/>
+  <testcase name="test_not_equals" classname="tree.NodeTest" time="0.002"/>
+</testsuite>
