@@ -1,5 +1,7 @@
 package tree
 
+import kotlin.math.pow
+
 class BTreePrinter {
     companion object {
         fun printNode(root: Node?) {
@@ -10,9 +12,9 @@ class BTreePrinter {
         private fun printNodeInternal(nodes: List<Node?>, level: Int, maxLevel: Int) {
             if (nodes.isEmpty() || isAllElementsNull(nodes)) return
             val floor = maxLevel - level
-            val edgeLines = Math.pow(2.0, Math.max(floor - 1, 0).toDouble()).toInt()
-            val firstSpaces = Math.pow(2.0, floor.toDouble()).toInt() - 1
-            val betweenSpaces = Math.pow(2.0, (floor + 1).toDouble()).toInt() - 1
+            val edgeLines = 2.0.pow((floor - 1).coerceAtLeast(0).toDouble()).toInt()
+            val firstSpaces = 2.0.pow(floor.toDouble()).toInt() - 1
+            val betweenSpaces = 2.0.pow((floor + 1).toDouble()).toInt() - 1
             printWhitespaces(firstSpaces)
             val newNodes = ArrayList<Node?>()
             for (node in nodes) {
@@ -53,7 +55,7 @@ class BTreePrinter {
 
         private fun maxLevel(node: Node?): Int {
             if (node == null) return 0
-            return Math.max(maxLevel(node.getLeftChild()), maxLevel(node.getRightChild())) + 1
+            return maxLevel(node.getLeftChild()).coerceAtLeast(maxLevel(node.getRightChild())) + 1
         }
 
         private fun isAllElementsNull(list: List<Node?>): Boolean {
