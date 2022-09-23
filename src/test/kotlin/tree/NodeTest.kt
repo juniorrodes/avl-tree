@@ -16,6 +16,7 @@ internal class NodeTest {
 
     @Test
     fun when_insert_new_node_should_found_same_key_in_the_structure() {
+
         tree?.let { assertEquals(Node(insertionArray[0], 1, 1), it.insert(6), "Key already exists") }
         tree?.let { assertEquals(Node(insertionArray[0], 1, 1), it.find(6), "Value not found") }
         tree?.let { assertEquals(Node(rootKey, height =  2).getHeight(), it.find(4)?.getHeight(), "Height isn't correct") }
@@ -42,25 +43,6 @@ internal class NodeTest {
         val insertedNode = tree?.insert(4)
 
         assertEquals(null, insertedNode)
-    }
-
-    @Test
-    fun should_return_correct_string() {
-        var excepted = "4"
-        var found = tree?.toString()
-        assertEquals(excepted, found)
-
-        tree?.insert(insertionArray[1])
-        excepted = "$excepted\n\t2"
-        assertEquals(excepted, tree.toString())
-
-        tree?.insert(insertionArray[3])
-        excepted = "$excepted\n\t5"
-        assertEquals(excepted, tree.toString())
-
-        tree?.insert(insertionArray[0])
-        excepted = "$excepted\n\t\t6"
-        assertEquals(excepted, tree.toString())
     }
 
     @Test

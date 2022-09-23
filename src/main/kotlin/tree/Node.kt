@@ -1,6 +1,6 @@
 package tree
 
-class Node(private val key: Int,
+class Node(private var key: Int,
            private var level: Int = 0,
            private var height: Int = 1,
            private var balanceFactor: Int = 0,
@@ -13,8 +13,20 @@ class Node(private val key: Int,
         else -> this
     }
 
-    public fun getHeight(): Int {
+    fun getHeight(): Int {
         return this.height
+    }
+
+    fun getRightChild(): Node? {
+        return this.rightChild
+    }
+
+    fun getLeftChild(): Node? {
+        return this.leftChild
+    }
+
+    fun getKey(): Int {
+        return this.key
     }
 
     fun insert(value: Int): Node? {
@@ -26,7 +38,7 @@ class Node(private val key: Int,
                     this.leftChild = newNode
                     newNode
                 } else {
-                    this.leftChild!!.insert(value)
+                    this.leftChild!!.insert(value) 
                 }
             } else {
                 if (this.rightChild == null) {
@@ -59,22 +71,10 @@ class Node(private val key: Int,
         this.height = leftTreeHeight.coerceAtLeast(rightTreeHeight) + 1
     }
 
-    override fun toString(): String {
-        var indentation = ""
-        for (i in 1..this.level) {
-            indentation = "$indentation\t"
-        }
-        if ((this.leftChild === null) && (this.rightChild !== null)) {
-            return "$indentation$key\n${rightChild}"
-        }
-        if ((this.leftChild !== null) && (this.rightChild === null)) {
-            return "$indentation$key\n${leftChild}"
-        }
-        if ((this.leftChild === null) && (this.rightChild === null)) {
-            return "$indentation$key"
-        }
-        return "$indentation$key\n$leftChild\n$rightChild"
-    }
+    
+    
+
+    
 
     override fun equals(other: Any?): Boolean {
         if (other !is Node) {
@@ -105,4 +105,78 @@ class Node(private val key: Int,
         result = 31 * result + (rightChild?.hashCode() ?: 0)
         return result
     }
+
+    fun delete(value: Int): Node? {
+        if (this.find(value) == null) {
+            return null
+        }
+        val newNode: Node? = if (value < this.key) {
+            this.leftChild = this.leftChild?.delete(value)
+            this
+        } else if (value > this.key) {
+            this.rightChild = this.rightChild?.delete(value)
+            this
+        } else {
+            if (this.leftChild == null) {
+                this.rightChild
+            } else if (this.rightChild == null) {
+                this.leftChild
+            } else {
+                val minNode = this.rightChild!!.findMin()
+                this.key = minNode!!.key
+                this.rightChild = this.rightChild!!.delete(minNode.key)
+                this
+            }
+        }
+        this.updateBalance()
+        this.updateTreeHeight()
+        return newNode
+    }
+
+    private fun findMin(): Node? {
+        return if (this.leftChild == null) {
+            this
+        } else {
+            this.leftChild!!.findMin()
+        }
+    }
+
+    fun preOrder(): List<Int> {
+        val list = mutableListOf<Int>()
+        list.add(this.key)
+        if (this.leftChild != null) {
+            list.addAll(this.leftChild!!.preOrder())
+        }
+        if (this.rightChild != null) {
+            list.addAll(this.rightChild!!.preOrder())
+        }
+        return list
+    }
+
+    fun postOrder(): List<Int> {
+        val list = mutableListOf<Int>()
+        if (this.leftChild != null) {
+            list.addAll(this.leftChild!!.postOrder())
+        }
+        if (this.rightChild != null) {
+            list.addAll(this.rightChild!!.postOrder())
+        }
+        list.add(this.key)
+        return list
+    }
+
+    fun inOrder(): List<Int> {
+        val list = mutableListOf<Int>()
+        if (this.leftChild != null) {
+            list.addAll(this.leftChild!!.inOrder())
+        }
+        list.add(this.key)
+        if (this.rightChild != null) {
+            list.addAll(this.rightChild!!.inOrder())
+        }
+        return list
+    }
+
+
+    
 }
