@@ -1,7 +1,6 @@
 package tree
 
 class Node(private var key: Int,
-           private var level: Int = 0,
            private var height: Int = 1,
            private var balanceFactor: Int = 0,
            private var leftChild: Node? = null,
@@ -13,28 +12,18 @@ class Node(private var key: Int,
         else -> this
     }
 
-    fun getHeight(): Int {
-        return this.height
-    }
+    fun getKey(): Int = this.key
 
-    fun getRightChild(): Node? {
-        return this.rightChild
-    }
+    fun getLeftChild(): Node? = this.leftChild
 
-    fun getLeftChild(): Node? {
-        return this.leftChild
-    }
-
-    fun getKey(): Int {
-        return this.key
-    }
+    fun getRightChild(): Node? = this.rightChild
 
     fun insert(value: Int): Node? {
         if (this.find(value) == null) {
             var newNode: Node?
             newNode = if (value < this.key) {
                 if (this.leftChild == null) {
-                    newNode = Node(value, this.level + 1)
+                    newNode = Node(value)
                     this.leftChild = newNode
                     newNode
                 } else {
@@ -42,7 +31,7 @@ class Node(private var key: Int,
                 }
             } else {
                 if (this.rightChild == null) {
-                    newNode = Node(value, this.level + 1)
+                    newNode = Node(value)
                     this.rightChild = newNode
                     newNode
                 } else {
@@ -55,55 +44,6 @@ class Node(private var key: Int,
         } else {
             return null
         }
-    }
-
-    private fun updateBalance() {
-        val leftTreeHeight = this.leftChild?.getHeight() ?: 0
-        val rightTreeHeight = this.rightChild?.getHeight() ?: 0
-
-        this.balanceFactor = leftTreeHeight - rightTreeHeight
-    }
-
-    private fun updateTreeHeight() {
-        val leftTreeHeight = this.leftChild?.getHeight() ?: 0
-        val rightTreeHeight = this.rightChild?.getHeight() ?: 0
-
-        this.height = leftTreeHeight.coerceAtLeast(rightTreeHeight) + 1
-    }
-
-    
-    
-
-    
-
-    override fun equals(other: Any?): Boolean {
-        if (other !is Node) {
-            return false
-        }
-        if (other.rightChild != this.rightChild) {
-            return false
-        }
-        if (other.leftChild != this.leftChild) {
-            return false
-        }
-        if (other.key != this.key) {
-            return false
-        }
-        if (other.level != this.level) {
-            return false
-        }
-        if (other.height != this.height) {
-            return false
-        }
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = key
-        result = 31 * result + height
-        result = 31 * result + (leftChild?.hashCode() ?: 0)
-        result = 31 * result + (rightChild?.hashCode() ?: 0)
-        return result
     }
 
     fun delete(value: Int): Node? {
@@ -122,9 +62,9 @@ class Node(private var key: Int,
             } else if (this.rightChild == null) {
                 this.leftChild
             } else {
-                val minNode = this.rightChild!!.findMin()
-                this.key = minNode!!.key
-                this.rightChild = this.rightChild!!.delete(minNode.key)
+                val maxNode = this.leftChild!!.findMax()
+                this.key = maxNode!!.key
+                this.leftChild = this.leftChild!!.delete(maxNode.key)
                 this
             }
         }
@@ -133,11 +73,130 @@ class Node(private var key: Int,
         return newNode
     }
 
-    private fun findMin(): Node? {
-        return if (this.leftChild == null) {
+    private fun balanceTree(): Node {
+        if (this.balanceFactor == 2) {
+            if (this.leftChild!!.balanceFactor == -1) {
+                this.leftChild = this.leftChild!!.rotate(true)
+            }
+
+            return this.rotate(false)
+        } else if (this.balanceFactor == -2) {
+            if (this.rightChild!!.balanceFactor == 1) {
+                this.rightChild = this.rightChild!!.rotate(false)
+            }
+
+            return this.rotate(true)
+        }
+
+        return this
+    }
+
+    private fun rotate(toLeft : Boolean): Node {
+        val newRoot : Node
+        if(toLeft){
+            newRoot = this.rightChild!!
+            this.rightChild = newRoot.leftChild
+            newRoot.leftChild = this
+        }
+        else{
+            newRoot = this.leftChild!!
+            this.leftChild = newRoot.rightChild
+            newRoot.rightChild = this
+        }
+        this.updateBalance()
+        this.updateTreeHeight()
+        newRoot.updateBalance()
+        newRoot.updateTreeHeight()
+
+        return newRoot
+    }
+
+
+
+    private fun updateBalance() {
+        val leftTreeHeight = this.leftChild?.height ?: 0
+        val rightTreeHeight = this.rightChild?.height ?: 0
+
+        this.balanceFactor = leftTreeHeight - rightTreeHeight
+        if(this.balanceFactor >= 2 || this.balanceFactor <= -2) {
+
+
+            val newNode = this.balanceTree()
+            if(newNode.leftChild === this){
+                this.updateNodeReference(newNode,true)
+            }
+            else if(newNode.rightChild===this){
+                this.updateNodeReference(newNode,false)
+            }
+
+        }
+    }
+
+    private fun duplicateNode(): Node {
+        val newNode = Node(this.key,  this.height, this.balanceFactor)
+        newNode.leftChild = this.leftChild
+        newNode.rightChild = this.rightChild
+        return newNode
+    }
+
+    private fun updateNodeReference(newNode : Node?,equalsLeftNode : Boolean) {
+        val duplicateMe = this.duplicateNode()
+        this.key = newNode!!.key
+        
+        this.height = newNode.height
+        this.balanceFactor = newNode.balanceFactor
+        if(equalsLeftNode){
+            this.leftChild = duplicateMe
+            this.rightChild = newNode.rightChild
+        }
+        else{
+            this.leftChild =  newNode.leftChild
+            this.rightChild = duplicateMe
+        }
+
+
+    }
+
+    private fun updateTreeHeight() {
+        val leftTreeHeight = this.leftChild?.height ?: 0
+        val rightTreeHeight = this.rightChild?.height ?: 0
+
+        this.height = leftTreeHeight.coerceAtLeast(rightTreeHeight) + 1
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (other !is Node) {
+            return false
+        }
+        if (other.rightChild != this.rightChild) {
+            return false
+        }
+        if (other.leftChild != this.leftChild) {
+            return false
+        }
+        if (other.key != this.key) {
+            return false
+        }
+       
+        if (other.height != this.height) {
+            return false
+        }
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = key
+        result = 31 * result + height
+        result = 31 * result + (leftChild?.hashCode() ?: 0)
+        result = 31 * result + (rightChild?.hashCode() ?: 0)
+        return result
+    }
+
+    private fun findMax(): Node? {
+        return if (this.rightChild == null) {
             this
         } else {
-            this.leftChild!!.findMin()
+            this.rightChild!!.findMax()
         }
     }
 
@@ -177,6 +236,9 @@ class Node(private var key: Int,
         return list
     }
 
+    override fun toString(): String {
+        return "Node\n(key=$key, height=$height, balanceFactor=$balanceFactor, leftChild=$leftChild, rightChild=$rightChild)\n"
+    }
 
     
 }
