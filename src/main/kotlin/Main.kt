@@ -18,7 +18,7 @@ fun main(args: Array<String>) {
     var tree = Node(readInt("Digite o valor do primeiro nó da árvore:"))
 
     while(true){
-        println("Selecione uma opção do menu:");
+        println("Selecione uma opção do menu:")
         println("1 - Mostrar árvore")
         println("2 - Buscar  nó da árvore")
         println("3 - Inserir nó da árvore")
@@ -29,8 +29,7 @@ fun main(args: Array<String>) {
         println("8 - Carregar árvore de arquivo")
         println("9 - Salvar árvore em arquivo")
         println("10 - Sair")
-        var option = reader.nextInt();
-        when(option){
+        when(reader.nextInt()){
             1 -> BTreePrinter.printNode(tree)
             2 -> when(tree.find(readInt("Digite o valor do nó a ser encontrado:"))){
                 null -> println("Nó não encontrado")
@@ -49,7 +48,7 @@ fun main(args: Array<String>) {
             7 -> println(tree.inOrder())
             8 -> tree = loadTreeFromFile(filePath)
             9 -> saveTreeToFile(tree, filePath)
-            10 -> break;
+            10 -> break
             11 -> print(tree)
             else -> println("Opção inválida")
         }
